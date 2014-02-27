@@ -3,21 +3,30 @@
 #include <math.h>
 
 int fat(int n);
-double precisaoMaquina(int n);
+float precisaoMaquinaSimples(int n);
+double precisaoMaquinaDupla(int n);
 
 main(){
-   printf("A precisao desta Maquina eh de: %lf\n",precisaoMaquina(1));
+   printf("A precisao simples desta Maquina eh de: %e\n",precisaoMaquinaSimples(1));
+   printf("A precisao dupla desta Maquina eh de: %e\n",precisaoMaquinaDupla(1));
    system("pause");
 }//END FUNCTION
 
-double precisaoMaquina(int n){
-   double a = 1, s = 1+a;
+float precisaoMaquinaSimples(int n){
+   float a = 1, s = 1+a;
    while(s>1){
-      printf("%lf\n",a);        
       a = a / 2;
       s = 1 + a;
    }//END WHILE
-   printf("%lf",a);
+   return 2*a;
+}//END FUNCTION
+
+double precisaoMaquinaDupla(int n){
+   double a = 1, s = 1+a;
+   while(s>1){
+      a = a / 2;
+      s = 1 + a;
+   }//END WHILE
    return 2*a;
 }//END FUNCTION
 
