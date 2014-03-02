@@ -2,6 +2,14 @@
 
 1 - Criar um algoritmo para Cacular a Precisão da Máquina
 
+## Tabela de Máquinas Testadas
+Máquina | Sistema Operacional        | Processador          | Memória | Base Processador
+---     | ---                        | ---                  | ---     | ---
+#1      | Windows 8 Single Languae   | Itenl Core i7-3632QM | 6GB     | x64
+#2      | Windows 7 Enterprise       | Intel Core 2 DUO     | 8GB     | x64
+#3      | Windows Vista Home Edition | -                    | -       | x86
+
+
 ## Tabela de Desempenho
 
 Máquina | Precisão Simples        | Precisão Dupla          | Tempo Decorrido | Linguagem
