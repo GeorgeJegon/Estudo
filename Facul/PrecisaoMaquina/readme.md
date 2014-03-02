@@ -5,7 +5,7 @@
 ## Tabela de Máquinas Testadas
 Máquina | Sistema Operacional        | Processador          | Memória | Base Processador
 ---     | ---                        | ---                  | ---     | ---
-#1      | Windows 8 Single Languae   | Itenl Core i7-3632QM | 6GB     | x64
+#1      | Windows 8 Single Languae   | Intel Core i7-3632QM | 6GB     | x64
 #2      | Windows 7 Enterprise       | Intel Core 2 DUO     | 8GB     | x64
 #3      | Windows Vista Home Edition | -                    | -       | x86
 
