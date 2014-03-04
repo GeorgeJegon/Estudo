@@ -39,7 +39,7 @@ public class PrecisaoMaquina {
 	public static void precisaoMaquinaArray(int[] r){
 		for(int x: r){
 			System.out.println("Valor de referência: "+x);
-			System.out.println("Precião Simples da Máquina: "+precisaoMaquina(x));
+			System.out.println("Precisão Simples da Máquina: "+precisaoMaquina(x));
 			System.out.println("Precisão Dupla da Máquina: "+precisaoMaquinaDouble(x));
 			System.out.println("---------------------------------------------");
 		}//END FOR
