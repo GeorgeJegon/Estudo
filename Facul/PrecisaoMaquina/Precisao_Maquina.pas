@@ -36,7 +36,7 @@ begin
     for i:=0 to t do
         begin
             writeln('Valor de referência: ',r[i]);
-            writeln('Precisão Dupla da Maquina: ', precisaoMaquinaSimples(r[i]));
+            writeln('Precisão Simples da Maquina: ', precisaoMaquinaSimples(r[i]));
             writeln('Precisão Dupla da Maquina: ', precisaoMaquinaDupla(r[i]));
             writeln('--------------------------------------------------------');
         end;
