@@ -13,8 +13,8 @@ Máquina | Sistema Operacional        | Processador          | Memória | Base P
 
 Máquina | Precisão Simples        | Precisão Dupla          | Linguagem
 ---     | ---                     | ---                     | ---
-#1      | `2.220446049250313e-16` | `-`                     | `JavaScript`
-#1      | `1.1920929E-7`          | `1.1920928955078125E-7` | `Java`
+#1      | `-`                     | `2.220446049250313e-16` | `JavaScript`
+#1      | `1.1920929E-7`          | `2.220446049250313E-16` | `Java`
 #1      | `1.192093e-007`         | `2.220446e-016`         | `C++`
 #3      | `-`                     | `2.2204460492503E-16`   | `PHP`
 #3      | `-`                     | `-`                     | `JavaScript`
