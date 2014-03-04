@@ -28,7 +28,7 @@ public class PresicaoMaquina {
 	}//END FUNCTION
 	
 	public static double precisaoMaquinaDouble(){
-		return precisaoMaquina(1);
+		return precisaoMaquinaDouble(1);
 	}//END FUNCTION
 	
 	public static double precisaoMaquinaDouble(int r){
