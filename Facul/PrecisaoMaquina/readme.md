@@ -6,7 +6,7 @@
   
   b) Como a cada passo A é dividido por 2, então devemos ao final do loop multiplicar o valor de A final para que retornemos um passo antes da soma de A + 1 for igual = 1.
   Exemplo:
-	Em C++ com precisão dupla o valor de A para que A + 1 = 0 é 1.110223e-016
+	Em C++ com precisão dupla o valor de A para que A + 1 = 1 é 1.110223e-016
 	Sendo assim temos que pegar o valor anterior a esse no qual A + 1 > 1 , sendo esse valor 2.220446e-016.
 	
   c) O valor da precisão encontrada se altera em função da referência passada, pois elas são inversamente proporcionais já que quanto maior o valor de entrada menor vai ser a precisão.
