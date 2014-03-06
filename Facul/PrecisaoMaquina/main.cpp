@@ -3,20 +3,18 @@
 #include <math.h>
 #define Length(x) (sizeof(x)/sizeof(x[0]))
 
-double fat(double n);
+double fat(int n);
 void taylorEulerExpTest(int x);
-float taylorEulerExpSimples(int x, int n);
-double taylorEulerExpDupla(int x, int n);
+void precisaoMaquinaArray(int n[],int ni);
 float precisaoMaquinaSimples(int n);
 double precisaoMaquinaDupla(int n);
-void precisaoMaquinaArray(int n[],int ni);
+double taylorEulerExpDupla(int x, int n);
 
 main(){
    /*int ArrayRefs[] = {1,10,17,100,184,1000,1575,10000,17893};
    precisaoMaquinaArray(ArrayRefs,Length(ArrayRefs));*/
    taylorEulerExpTest(5);
-   //printf("Valor euler por Taylor usando Float: %f\n",taylorEulerExpSimples(5,15));
-   printf("Valor euler por Taylor usando Double: %lf\n",taylorEulerExpDupla(5,15));
+   printf("Valor euler por Taylor usando Double: %0.17e\n",taylorEulerExpDupla(2,10));
    system("pause");
 }//END FUNCTION
 
@@ -47,7 +45,7 @@ void precisaoMaquinaArray(int n[],int ni){
   }//END FOR
 }//END FUNCTION
 
-double fat(double n){
+double fat(int n){
     if(n<=1){
          return 1;
     }//END IF
@@ -58,25 +56,15 @@ void taylorEulerExpTest(int x){
      printf("Valor de e^x: %e\n",pow(M_E,x));
 }//END FUNCTION
 
-float taylorEulerExpSimples(int x, int n){
-    float r;
-    if(n<=1){
-         return 1;
-    }//END IF
-    r = taylorEulerExpSimples(x,n-1)+(pow(x,n-1)/fat(n-1));
-    printf("Fatorial: %d\n",fat(n-1));
-    printf("Potencia: %lf\n",pow(x,n-1));
-    printf("%f\n",r);
-    return r;
-}//END FUNCTION
-
 double taylorEulerExpDupla(int x, int n){
     double r;
     if(n<=1){
         return 1;
     }//END IF
-    r = taylorEulerExpDupla(x,n-1)+(pow(x,n-1)/fat(n-1));
-    printf("Fatorial: %d\n",fat(n-1));
-    printf("Potencia: %lf\n",pow(x,n-1));
-    printf("%f\n",r);
+    r = (pow((double)x,(double)n-1)/fat(n-1)) + taylorEulerExpDupla(x,n-1);
+    printf("Fatorial: %0.17e\n",fat(n-1));
+    printf("Potencia: %.017e\n",pow(x,n-1));
+    printf("%0.17e",r);
+    printf("\n--------------------------------------------------\n");
+    return r;
 }//END FUNCTION
