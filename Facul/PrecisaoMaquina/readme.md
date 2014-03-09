@@ -9,7 +9,15 @@
 	Em C++ com precisão dupla o valor de A para que A + 1 = 1 é 1.110223e-016
 	Sendo assim temos que pegar o valor anterior a esse no qual A + 1 > 1 , sendo esse valor 2.220446e-016.
 	
-  c) O valor da precisão encontrada se altera em função da referência passada, pois elas são inversamente proporcionais já que quanto maior o valor de entrada menor vai ser a precisão.
+  c) O valor da precisão encontrada se altera em função da referência passada, pois elas são inversamente proporcionais já que quanto maior o valor de entrada menor vai ser a precisão, pois, a entrada ocupará um maior número de bit quando somada ao valor de A, ou seja fará com que o corte(truncamento) seja um pouco antes se comparado à um valor que ocupe uma quantidade menor de bits.
+  
+2 - Calcular e^x usando a Série de Taylor
+
+  a) Analisando os resultados encontrados, podemos afirmar que quanto maior o X maior será o N para obter uma maior aproximação do valor real. Exemplo: para encontrar o valor de e^10 com a maior precisão tive que usar N = 50, mas para encontrar e^25 a melhor precisão foi encontrada apartir de N = 80. Ou seja, valor de X e de N são diretamente proporcionais.
+  
+  b)
+  
+  c)
   
 
 ## Tabela de Máquinas Testadas
