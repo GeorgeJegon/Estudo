@@ -30,9 +30,15 @@ main(){
    //resolucaoExercicio2a();
    //resolucaoExercicio2b();
    //printf("Resultado usando Simplificacao de Fracao: %e\n",taylorEulerExpDuplaSimplify(2,91));
-   //printf("Resultado usando calculo normal: %e\n",taylorEulerExpDupla(2,91));
-   //printf("%e\n",simplifyExpAndFat(2,5,5));
-   resolucaoExercicio2aTest();
+   double r = taylorEulerExpDupla(2,23), t = simplifyExpAndFat(2,22,22);
+   printf("Resultado usando calculo normal: %0.17e\n",taylorEulerExpDupla(2,22));
+   printf("Resultado usando calculo normal: %0.17e\n",r);
+   printf("Resultado usando calculo normal: %0.17e\n",r+t);
+   printf("%0.17e\n",t);
+   //printf("%e\n",simplifyExpAndFat(2,21,21));
+   //taylorEulerExpTest(100);
+   //printf("Resultado usando calculo normal: %0.17e\n",taylorEulerExpDuplaSimplify(100,156));
+   //resolucaoExercicio2aTest();
    system("pause");
 }//END FUNCTION
 
@@ -55,7 +61,7 @@ void resolucaoExercicio2a(){
 
 void resolucaoExercicio2aTest(){
      int ArrayX[] = {1,2,5,10,25,45,65,85,99,100},
-         ArrayN[] = {1,10,20,30,40,50,60,70,80,90,100,150,155};
+         ArrayN[] = {1,10,20,30,40,50,60,70,80,90,100,150,155,156,157};
      printf("x | n | Resutado\n");
      for(int a=0,b=Length(ArrayX);a<b;a++){
          for(int c=0,d=Length(ArrayN);c<d;c++){
