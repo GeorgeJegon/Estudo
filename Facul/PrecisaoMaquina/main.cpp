@@ -13,6 +13,7 @@ double precisaoMaquinaDupla(int n);
 double taylorEulerExpDupla(int x, int n);
 double taylorEulerExpDuplaInversa(int x,int n);
 double taylorEulerExpDuplaSimplify(int x, int n);
+double taylorEulerExpDuplaInfinito(int x, int n);
 double simplifyExpAndFat(int b,int e,int f);
 
 /*Tools*/
@@ -30,16 +31,54 @@ main(){
    //resolucaoExercicio2a();
    //resolucaoExercicio2b();
    //printf("Resultado usando Simplificacao de Fracao: %e\n",taylorEulerExpDuplaSimplify(2,91));
-   double r = taylorEulerExpDupla(2,23), t = simplifyExpAndFat(2,22,22);
-   printf("Resultado usando calculo normal: %0.17e\n",taylorEulerExpDupla(2,22));
-   printf("Resultado usando calculo normal: %0.17e\n",r);
-   printf("Resultado usando calculo normal: %0.17e\n",r+t);
-   printf("%0.17e\n",t);
+   //printf("%0.17e\n",2+precisaoMaquinaDupla(1));
+   int x = 2, n = 50;
+   double r = taylorEulerExpDupla(x,n), t = simplifyExpAndFat(x,n-1,n-1);
+   printf("\n------------------------------------\n");
+   double g = taylorEulerExpDuplaInfinito(2,0);
+   
+   printf("R: %0.17e\n",r);
+   printf("R: %0.17e\n",g);
+   /*printf("T: %0.17e\n",t);
+   printf("Valor anterior de R: %0.17e\n",r-t);*/
+   //printf("Resultado usa   ndo calculo normal: %0.17e\n",r+t);
+   
    //printf("%e\n",simplifyExpAndFat(2,21,21));
    //taylorEulerExpTest(100);
    //printf("Resultado usando calculo normal: %0.17e\n",taylorEulerExpDuplaSimplify(100,156));
    //resolucaoExercicio2aTest();
    system("pause");
+}//END FUNCTION
+
+double taylorEulerExpDuplaInfinito(int x, int n){
+    double c = 0;
+    n = (n<0)?0:n;
+    if(n==0){
+        c = 1.00;
+    }else if(n==1){     
+        c = (double)x;
+    }else{
+        c = (n==0)?1:(pow((double)x,(double)n)/fat(n));
+    }//END IF
+
+    if(n>=49){
+        printf("You shall not pass %i\n",n);
+        return 0;
+    }else{
+        //printf("Valor para n = %i: %0.17e\n",n,c);
+        printf("%0.17e\n",c);
+        return c + taylorEulerExpDuplaInfinito(x,++n);
+    }//END IF
+}//END FUNCTION
+
+double taylorEulerExpDupla(int x, int n){
+    if(n<=1){
+        return 1;
+    }//END IF
+    n--;
+    printf("%0.17e\n",(pow((double)x,(double)n)/fat(n)));
+    //printf("Valor para n = %i: %0.17e\n",n,(pow((double)x,(double)n)/fat(n)));
+    return (pow((double)x,(double)n)/fat(n)) + taylorEulerExpDupla(x,n);
 }//END FUNCTION
 
 void resolucaoExercicio2a(){
@@ -141,13 +180,6 @@ double fat(int n){
 
 void taylorEulerExpTest(int x){
      printf("Valor de e^x: %0.17e\n",pow(M_E,x));
-}//END FUNCTION
-
-double taylorEulerExpDupla(int x, int n){
-    if(n<=1){
-        return 1;
-    }//END IF
-    return (pow((double)x,(double)n-1)/fat(n-1)) + taylorEulerExpDupla(x,n-1);
 }//END FUNCTION
 
 double taylorEulerExpDuplaSimplify(int x, int n){
