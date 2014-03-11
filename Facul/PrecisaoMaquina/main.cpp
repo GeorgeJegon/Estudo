@@ -6,69 +6,109 @@
 
 /*Cálculos*/
 double fat(int n);
-void taylorEulerExpTest(int x);
-void precisaoMaquinaArray(int n[],int ni);
-float precisaoMaquinaSimples(int n);
-double precisaoMaquinaDupla(int n);
 double taylorEulerExpDupla(int x, int n);
-double taylorEulerExpDuplaInversa(int x,int n);
+//double taylorEulerExpLoop(int x, int n);
 double taylorEulerExpDuplaSimplify(int x, int n);
-double taylorEulerExpDuplaInfinito(int x, int n);
+double taylorEulerExpDuplaSimplifyLoop(int x, int n);
+double taylorEulerExpDuplaInfinito(int x, int n,double r);
+double taylorEulerExpDuplaInfinitoLoop(int x);
 double simplifyExpAndFat(int b,int e,int f);
 
-/*Tools*/
-void smartSpaces(int n,int r);
-int numberLength(int n);
 
-/*Exercícios*/
-void resolucaoExercicio1();
-void resolucaoExercicio2a();
-void resolucaoExercicio2aTest();
-void resolucaoExercicio2b();
+/*COLTRO*/
+double theCutter(int base, int fat){
+        int potencia[fat];
+        int fatorial[fat];
+        double pote=1 , fato=1;
 
-main(){
-   //resolucaoExercicio1();
-   //resolucaoExercicio2a();
-   //resolucaoExercicio2b();
-   //printf("Resultado usando Simplificacao de Fracao: %e\n",taylorEulerExpDuplaSimplify(2,91));
-   //printf("%0.17e\n",2+precisaoMaquinaDupla(1));
-   int x = 2, n = 50;
-   double r = taylorEulerExpDupla(x,n), t = simplifyExpAndFat(x,n-1,n-1);
-   printf("\n------------------------------------\n");
-   double g = taylorEulerExpDuplaInfinito(2,0);
-   
-   printf("R: %0.17e\n",r);
-   printf("R: %0.17e\n",g);
-   /*printf("T: %0.17e\n",t);
-   printf("Valor anterior de R: %0.17e\n",r-t);*/
-   //printf("Resultado usa   ndo calculo normal: %0.17e\n",r+t);
-   
-   //printf("%e\n",simplifyExpAndFat(2,21,21));
-   //taylorEulerExpTest(100);
-   //printf("Resultado usando calculo normal: %0.17e\n",taylorEulerExpDuplaSimplify(100,156));
-   //resolucaoExercicio2aTest();
-   system("pause");
+        int i=0, j=0;
+
+        for(i=0; i<fat; i++){
+                fatorial[i] = fat - i;
+                potencia[i] = base;
+        }
+
+        for(i=0; i<fat; i++){
+                for(j=0; j<fat; j++){
+                        if(fatorial[i]%potencia[j]==0 && potencia[j]!=1){
+                                fatorial[i] /= potencia[j];
+                                potencia[j] = 1;
+                        }
+                }
+        }
+
+        for(i=0; i<fat; i++){
+                pote *= potencia[i];
+                fato *= fatorial[i];
+        }
+
+
+        return pote/fato;
+}
+double serieTaylorTest(double x){
+	int i, c = 1;
+	double sum =0,test =0;
+	for(i=0;c==1; i++){
+        test = (sum+theCutter((int) x, i));            
+        //printf("n: %i | r: %0.17e | next r: %0.17e\n",i,sum,test);
+        if(test==sum){
+           c = 0; 
+        }else{
+           sum += theCutter((int) x, i);
+        }//END IF
+	}//END FOR
+	return sum;
 }//END FUNCTION
 
-double taylorEulerExpDuplaInfinito(int x, int n){
-    double c = 0;
+/*COLTRO*/
+
+main(){
+    double a,b,c,d,e;
+    int x = 75, n = 164;
+    a = taylorEulerExpDuplaSimplify(x,n);
+    b = taylorEulerExpDuplaSimplifyLoop(x,n);
+    c = taylorEulerExpDuplaInfinitoLoop(x);
+    d = taylorEulerExpDuplaInfinito(x,0,0);
+    e = serieTaylorTest(x);
+    printf("Evitando Overflow(recursiva):\n%0.17e\n",a);
+    printf("\n----------------------------------------------------------------\n");
+    printf("Evitando Overflow(loop):\n%0.17e\n",b);
+    printf("\n----------------------------------------------------------------\n");
+    printf("Sem determinar N(loop):\n%0.17e\n",c);
+    printf("\n----------------------------------------------------------------\n");
+    printf("Sem determinar N(recursiva):\n%0.17e\n",d);
+    printf("\n----------------------------------------------------------------\n");
+    printf("Testando a do coltro(loop):\n%0.17e\n",e);
+    system("pause");
+}//END FUNCTION
+
+double taylorEulerExpDuplaInfinito(int x, int n,double r){
+    double t;
     n = (n<0)?0:n;
     if(n==0){
-        c = 1.00;
-    }else if(n==1){     
-        c = (double)x;
+        t = 1;
+    }else if(n==1){
+        t = x;
     }else{
-        c = (n==0)?1:(pow((double)x,(double)n)/fat(n));
+        t = simplifyExpAndFat(x,n,n);
     }//END IF
+    if((r+t)==r){
+       return r;
+    }//END IF
+    return taylorEulerExpDuplaInfinito(x,++n,t+r);
+}//END FUNCTION
 
-    if(n>=49){
-        printf("You shall not pass %i\n",n);
-        return 0;
-    }else{
-        //printf("Valor para n = %i: %0.17e\n",n,c);
-        printf("%0.17e\n",c);
-        return c + taylorEulerExpDuplaInfinito(x,++n);
-    }//END IF
+double taylorEulerExpDuplaInfinitoLoop(int x){
+    double s = 1, check = 0;
+    for(int i=1,c=1;c==1;i++){
+        check = (s + simplifyExpAndFat(x,i,i));
+        if(check==s){
+            c = 0;
+        }else{
+            s = check;
+        }//END IF
+    }//END FOR
+    return s;
 }//END FUNCTION
 
 double taylorEulerExpDupla(int x, int n){
@@ -76,110 +116,7 @@ double taylorEulerExpDupla(int x, int n){
         return 1;
     }//END IF
     n--;
-    printf("%0.17e\n",(pow((double)x,(double)n)/fat(n)));
-    //printf("Valor para n = %i: %0.17e\n",n,(pow((double)x,(double)n)/fat(n)));
     return (pow((double)x,(double)n)/fat(n)) + taylorEulerExpDupla(x,n);
-}//END FUNCTION
-
-void resolucaoExercicio2a(){
-     int ArrayX[] = {1,2,5,10,25,45,65,85,99,100},
-         ArrayN[] = {1,10,20,30,40,50,60,70,80,90,100,150,155};
-     printf("x | n | Resutado\n");
-     for(int a=0,b=Length(ArrayX);a<b;a++){
-         for(int c=0,d=Length(ArrayN);c<d;c++){
-             int x = ArrayX[a], n = ArrayN[c];
-             printf("%i",x);
-             smartSpaces(numberLength(x),4);
-             printf("| %i",n);
-             smartSpaces(numberLength(n),4);
-             printf("| `%0.17e`",taylorEulerExpDupla(x,n));
-             printf("\n");
-         }//END FUNCTION
-     }//END FOR
-}//END FUNCTION
-
-void resolucaoExercicio2aTest(){
-     int ArrayX[] = {1,2,5,10,25,45,65,85,99,100},
-         ArrayN[] = {1,10,20,30,40,50,60,70,80,90,100,150,155,156,157};
-     printf("x | n | Resutado\n");
-     for(int a=0,b=Length(ArrayX);a<b;a++){
-         for(int c=0,d=Length(ArrayN);c<d;c++){
-             int x = ArrayX[a], n = ArrayN[c];
-             printf("%i",x);
-             smartSpaces(numberLength(x),4);
-             printf("| %i",n);
-             smartSpaces(numberLength(n),4);
-             printf("| `%0.17e`",taylorEulerExpDuplaSimplify(x,n));
-             printf("\n");
-         }//END FUNCTION
-     }//END FOR
-}//END FUNCTION
-
-void resolucaoExercicio2b(){
-     /*int ArrayX[] = {1,2,49,50,99,100},
-         ArrayN[] = {1,11,21,31,41,51,61,71,81,91};*/
-     int ArrayX[] = {1,2,5,10,25,45,65,85,99,100},
-         ArrayN[] = {1,10,20,30,40,50,60,70,80,90,100,150,155};
-     printf("x | n | Resutado\n");
-     for(int a=0,b=Length(ArrayX);a<b;a++){
-         for(int c=0,d=Length(ArrayN);c<d;c++){
-             int x = -ArrayX[a], n = ArrayN[c];
-             double r = taylorEulerExpDupla(x,n),
-                    ir = taylorEulerExpDuplaInversa(x,n),
-                    diff = (r - ir);
-             printf("%i",x);
-             smartSpaces(numberLength(x),4);
-             printf("| %i",n);
-             smartSpaces(numberLength(n),4);
-             printf("| `%0.17e` ",r);
-             printf("| `%0.17e` ",ir);
-             printf("| `%0.17e` ",diff);
-             printf("\n");
-         }//END FUNCTION
-     }//END FOR
-}//END FUNCTION
-
-void resolucaoExercicio1(){
-   int ArrayRefs[] = {1,10,17,100,184,1000,1575,10000,17893};
-   precisaoMaquinaArray(ArrayRefs,Length(ArrayRefs));
-}//END FUNCTION
-
-void precisaoMaquinaArray(int n[],int ni){
-  for(int i=0;i<ni;i++){
-    printf("Valor de referencia: %i\n",n[i]);                        
-    printf("Precisao Simples da Maquina: %e\n",precisaoMaquinaSimples(n[i]));
-    printf("Precisao Dupla da Maquina: %e\n",precisaoMaquinaDupla(n[i]));
-    printf("--------------------------------------------------\n");
-  }//END FOR
-}//END FUNCTION
-
-float precisaoMaquinaSimples(int n){
-   float a = 1, s = n+a;
-   while(s>n){
-      a = a / 2;
-      s = n + a;
-   }//END WHILE
-   return 2*a;
-}//END FUNCTION
-
-double precisaoMaquinaDupla(int n){
-   double a = 1, s = n+a;
-   while(s>n){
-      a = a / 2;
-      s = n + a;
-   }//END WHILE
-   return 2*a;
-}//END FUNCTION
-
-double fat(int n){
-    if(n<=1){
-         return 1;
-    }//END IF
-    return n * fat(n-1);
-}//END FUNCTION
-
-void taylorEulerExpTest(int x){
-     printf("Valor de e^x: %0.17e\n",pow(M_E,x));
 }//END FUNCTION
 
 double taylorEulerExpDuplaSimplify(int x, int n){
@@ -189,8 +126,13 @@ double taylorEulerExpDuplaSimplify(int x, int n){
     return simplifyExpAndFat(x,n,n) + taylorEulerExpDuplaSimplify(x,n);
 }//END FUNCTION
 
-double taylorEulerExpDuplaInversa(int x,int n){
-    return 1/taylorEulerExpDupla(abs(x),n);
+double taylorEulerExpDuplaSimplifyLoop(int x, int n){
+    double s = 1;
+    n = (n<=1)?1:n;
+    for(int i=1;i<n;i++){
+        s += (i==1)?x:simplifyExpAndFat(x,i,i);
+    }//END FOR
+    return s;
 }//END FUNCTION
 
 double simplifyExpAndFat(int b,int e,int f){
@@ -210,12 +152,9 @@ double simplifyExpAndFat(int b,int e,int f){
     for(int i=0;i<e;i++){
         for(int j=0;j<maxf;j++){
             if(pot[i]!=1){
-                if(fat[j]>=pot[i] && (fat[j]%pot[i])==0){
+                if((fat[j]%pot[i])==0){
                    fat[j] /= pot[i];
                    pot[i] = 1;
-                }else if(pot[i]>fat[j] && (pot[i]%fat[j])==0){
-                   fat[j] = 1;
-                   pot[i] /= fat[j];
                 }//END IF
             }//END IF    
         }//END FOR            
@@ -233,20 +172,9 @@ double simplifyExpAndFat(int b,int e,int f){
     return rp/rf;
 }//END FUNCTION
 
-/*Tools Definition's*/
-void smartSpaces(int n,int r){
-     int j = (r - n);
-     for(int i = 0;i<j;i++){
-         printf(" ");
-     }//END FOR
-}//END FUNCTION
-
-int numberLength(int n){
-    int l = 1, b = 10;
-    n = (n<0)?-n:n;
-    while(n>=b){
-        b *=10;
-        l++;
-    }//END WHILE
-    return l;
+double fat(int n){
+    if(n<=1){
+         return 1;
+    }//END IF
+    return n * fat(n-1);
 }//END FUNCTION
