@@ -14,7 +14,7 @@ function precisaoMaquinaArray(a){
 			console.log(precisaoMaquina(o));
 		});
 	}//END IF
-	
+
 }//END FUNCTION
 
 function isArray(a){
