@@ -25,23 +25,25 @@ Máquina | Sistema Operacional        | Processador          | Memória | Base P
 ---     | ---                        | ---                  | ---     | ---
 #1      | Windows 8 Single Languae   | Intel Core i7-3632QM | 6GB     | x64
 #2      | Windows 7 Enterprise       | Intel Core 2 DUO     | 8GB     | x64
-#3      | Windows Vista Home Premium | Intel Core 2 Quad    | 4GB     | x86
 
 ## Tabela de Precisão
 
 Máquina | Precisão Simples        | Precisão Dupla          | Linguagem
 ---     | ---                     | ---                     | ---
-#1      | `-`                     | `2.220446049250313e-16` | `JavaScript`
 #1      | `1.1920929E-7`          | `2.220446049250313E-16` | `Java`
 #1      | `1.192093e-007`         | `2.220446e-016`         | `C++`
 #1      | `1.192092896E-07`       | `2.22044604925031E-016` | `Pascal`
-#3      | `-`                     | `2.2204460492503E-16`   | `PHP`
-#3      | `-`                     | `-`                     | `JavaScript`
-#3      | `-`                     | `-`                     | `VisualG`
+#1      | `-`                     | `2.220446049250313e-16` | `JavaScript`
+#1      | `-`                     | `2.2204460492503E-16`   | `PHP`
+#2      | `1.1920929E-7`          | `2.220446049250313E-16` | `Java`
+#2      | `1.192093e-007`         | `2.220446e-016`         | `C++`
+#2      | `1.192092896E-07`       | `2.22044604925031E-016` | `Pascal`
+#2      | `-`                     | `2.220446049250313e-16` | `JavaScript`
+#2      | `-`                     | `2.2204460492503E-16`   | `PHP`
 
 ## Tabela de Precisão em função da Referência
 
-### C++ (#3)
+### C++ (#1)
 
 Referência | Precisão Simples | Precisão Dupla 
 ---        | ---              | ---            
@@ -54,7 +56,7 @@ Referência | Precisão Simples | Precisão Dupla
 10000      | `9.765625e-004`  | `1.818989e-012`
 17893      | `1.953125e-003`  | `3.637979e-012`
 
-### Pascal (#3)
+### Pascal (#1)
 
 Referência | Precisão Simples  | Precisão Dupla 
 ---        | ---               | ---            
@@ -67,7 +69,7 @@ Referência | Precisão Simples  | Precisão Dupla
 10000      | `9.765625000E-04` | `1.81898940354586E-012`
 17893      | `1.953125000E-03` | `3.63797880709171E-012`
 
-### Java (#3)
+### Java (#1)
 
 Referência | Precisão Simples | Precisão Dupla 
 ---        | ---              | ---            
