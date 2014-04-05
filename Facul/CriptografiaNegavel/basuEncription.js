@@ -46,21 +46,6 @@ var BasuEncription = (function(){
 		var r1 = getRandomArrayControllerByMatrix(n,A),
 				m1 = binaryMessageXOR(c,r1);
 		return binaryMessageTranslate(binaryMessageXOR(binaryMessageAND(binaryStringNegation(binaryMessageXOR(m1,leftPadding(m1.length,"0",getBinaryMessage(m2)))),r1),c));
-		/*
-		return binaryMessageTranslate(
-			binaryMessageXOR(
-				binaryMessageAND(
-					binaryStringNegation(
-						binaryMessageXOR(
-							m1,leftPadding(
-								m1.length,"0",getBinaryMessage(m2)
-							)
-						)
-					),r1
-				),c
-			)
-		);
-		*/
 	}//END FUNCTION
 
 	function getRandomArrayController(){
