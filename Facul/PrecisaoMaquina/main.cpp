@@ -73,7 +73,7 @@ double serieTaylorTest(double x){
 /*COLTRO*/
 
 main(){
-    int x = 100, n = 156;
+    int x = 80, n = 156;
     //taylorVariasFuncoesTest(x,n);
     taylorEulerExpTest(x);
     printf("%0.17e\n",taylorEulerExpDuplaInfinitoLoop(x));
@@ -192,7 +192,10 @@ double taylorEulerExpDuplaInfinitoLoop(int x){
     double s = 1, check = 0;
     for(int i=1,c=1;c==1;i++){
         check = (s + simplifyExpAndFat(x,i,i));
-        printf("n = %i | r: %0.17e | new r: %0.17e\n",i,s,check);
+        printf("n = %i | r: %0.17e | new r: %0.17e | new r - r: %0.17e\n",i,s,check,(check-s));
+        if((check-s) < 0.00000001){
+           printf("aQUI PORRA: %0.17e\n",s);
+        }//END IF
         if(check==s){
             c = 0;
         }else{
