@@ -12,9 +12,8 @@ class PHPCrawler {
 
   private $filterSameHost = false;
 
-  date_default_timezone_set("Brazil/East");
-
   function __construct($url) {
+    date_default_timezone_set("Brazil/East");
     $this->url = $url;
     $this->buildURLObject();
   }
