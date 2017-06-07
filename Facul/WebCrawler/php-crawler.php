@@ -1,6 +1,7 @@
 <?php
-include "lib/simple_html_dom.php";
-include "lib/http_build_url.php";
+require_once "lib/simple_html_dom.php";
+require_once "lib/http_build_url.php";
+require_once "lib/parsecsv.lib.php";
 
 // https://stackoverflow.com/questions/13139704/multi-thread-multi-curl-crawler-in-php
 
@@ -9,12 +10,14 @@ class PHPCrawler {
   public $foundLinks = [], $filterRules = [], $filteredLinks = [];
   public $ignoredLinks = [], $analyzedLinks = [];
   private $urlObject;
+  private $csv;
 
   private $filterSameHost = false;
 
   function __construct($url) {
     date_default_timezone_set("Brazil/East");
     $this->url = $url;
+    $this->csv = new parseCSV();
     $this->buildURLObject();
   }
 
@@ -25,6 +28,8 @@ class PHPCrawler {
       return false;
     }
 
+    $this->handlePage();
+
     $this->getLinks();
     $this->filterLinks();
     $this->setIgnoredLinks();
@@ -34,6 +39,33 @@ class PHPCrawler {
       $this->setURL($link);
       $this->execute();
     }, $this->filteredLinks);
+  }
+
+  public function handlePage() {
+    $productContent = $this->response->find("[class='content-product']", 0);
+
+    if (is_object($productContent)) {
+      $productInfo  = $productContent->find("[class='product-info']", 0);
+      $productValue = $productInfo->find("span.ctrValorMoeda", 0)->innertext;
+      $productName  = trim($productInfo->find("h1[itemprop='name']", 0)->innertext);
+      $productDescription = $productContent->find("[data-tab='product-description'] p", 1)->innertext;
+
+      $productRow = array(
+        $productDescription,
+        $productValue,
+        $productName
+      );
+
+      $productRow = array_map("html_entity_decode", $productRow);
+
+      $this->csv->save("data.csv",
+        array(
+          $productRow
+        ),
+      true);
+    } else {
+      $this->logger("Element not found! [Error 404 :D]");
+    }
   }
 
   public function useSameHostFilter() {
@@ -135,7 +167,7 @@ class PHPCrawler {
 // nome, preço, foto e descrição dos produtos
 //
 
-$url = "https://www.macbebe.com.br";
+// $url = "https://www.macbebe.com.br";
 
 // $url = "https://www.macbebe.com.br/sapatinho-para-bebe-menino-menina-mac-bebe-masculino-feminino";
 // $url = "https://www.macbebe.com.br/pedro-lucas-cafe";
