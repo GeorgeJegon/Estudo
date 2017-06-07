@@ -165,12 +165,7 @@ class PHPCrawler {
 }
 
 // nome, preço, foto e descrição dos produtos
-//
-
-// $url = "https://www.macbebe.com.br";
-
-// $url = "https://www.macbebe.com.br/sapatinho-para-bebe-menino-menina-mac-bebe-masculino-feminino";
-// $url = "https://www.macbebe.com.br/pedro-lucas-cafe";
+$url = "https://www.macbebe.com.br";
 
 $crawler = new PHPCrawler($url);
 $crawler->useSameHostFilter(true);
