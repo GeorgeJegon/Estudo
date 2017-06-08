@@ -18,6 +18,7 @@ class PHPCrawler {
     date_default_timezone_set("Brazil/East");
     $this->url = $url;
     $this->csv = new parseCSV();
+    $this->csv->save("data.csv",[]);
     $this->buildURLObject();
   }
 
