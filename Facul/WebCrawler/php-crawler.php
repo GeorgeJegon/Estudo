@@ -46,14 +46,17 @@ class PHPCrawler {
 
     if (is_object($productContent)) {
       $productInfo  = $productContent->find("[class='product-info']", 0);
+      $productPhoto = $productContent->find("#ctrFotoPrincipal", 0)->getAttribute("src");
       $productValue = $productInfo->find("span.ctrValorMoeda", 0)->innertext;
       $productName  = trim($productInfo->find("h1[itemprop='name']", 0)->innertext);
       $productDescription = $productContent->find("[data-tab='product-description'] p", 1)->innertext;
 
       $productRow = array(
+        $productName,
+        $this->url,
         $productDescription,
         $productValue,
-        $productName
+        $productPhoto
       );
 
       $productRow = array_map("html_entity_decode", $productRow);
