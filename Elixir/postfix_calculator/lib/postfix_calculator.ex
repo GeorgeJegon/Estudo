@@ -11,7 +11,7 @@ defmodule PostfixCalculator do
       iex> PostfixCalculator.run([2, 3, "+"])
       5
 
-      # iex> PostfixCalculator.run([5, 2, 3, "+", "-"])
+      iex> PostfixCalculator.run([5, 2, 3, "+", "-"])
       0
 
       iex> PostfixCalculator.run([2, 3, 11, "+", 5, "-", "*"])
