@@ -62,11 +62,7 @@ class PHPCrawler {
 
       $productRow = array_map("strip_tags", array_map("trim", array_map("html_entity_decode", $productRow)));
 
-      $this->csv->save("data.csv",
-        array(
-          $productRow
-        ),
-      true);
+      $this->csv->save("data.csv", array($productRow), true);
     } else {
       $this->logger("Element not found! [Error 404 :D]");
     }
