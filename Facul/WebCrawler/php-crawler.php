@@ -64,7 +64,7 @@ class PHPCrawler {
 
       $this->csv->save("data.csv", array($productRow), true);
     } else {
-      $this->logger("Element not found! [Error 404 :D]");
+      // $this->logger("Product Not Found!");
     }
   }
 
