@@ -59,7 +59,7 @@ class PHPCrawler {
         $productPhoto
       );
 
-      $productRow = array_map("html_entity_decode", $productRow);
+      $productRow = array_map("strip_tags", array_map("trim", array_map("html_entity_decode", $productRow)));
 
       $this->csv->save("data.csv",
         array(
