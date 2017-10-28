@@ -22,5 +22,11 @@ class Game
     @currentTurn += 1
     @current_player = (@currentTurn % 2) + 1
   end
+
+  def display_game_errors
+    puts @board.errors.join("\n")
+    @board.errors = []
+  end
+
   end
 end
