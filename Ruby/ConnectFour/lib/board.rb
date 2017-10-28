@@ -20,6 +20,7 @@ class Board
       @errors << "Número de Coluna inválido!"
     end
   end
+
   def draw
     puts @grid.reverse.map(&method(:draw_line)).join("\n")
   end
