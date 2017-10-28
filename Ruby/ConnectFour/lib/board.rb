@@ -6,6 +6,10 @@ class Board
   def draw
     puts @grid.reverse.map(&method(:draw_line)).join("\n")
   end
+
+  def board_string
+    @grid.reverse.flatten.join
+  end
   def draw_column(column)
     column.zero? ? " " : column
   end
