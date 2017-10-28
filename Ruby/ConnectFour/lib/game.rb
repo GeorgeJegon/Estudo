@@ -37,5 +37,10 @@ class Game
     @board.errors = []
   end
 
+  private
+
+  def winner?
+    @board.win?(1) || @board.win?(2)
+  end
   end
 end
