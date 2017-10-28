@@ -24,6 +24,11 @@ class Game
   def draw_board
     @board.draw
   end
+
+  def finished?
+    winner? || stuck?
+  end
+
   protected
 
   def next_turn
@@ -42,5 +47,8 @@ class Game
   def winner?
     @board.win?(1) || @board.win?(2)
   end
+
+  def stuck?
+    false
   end
 end
