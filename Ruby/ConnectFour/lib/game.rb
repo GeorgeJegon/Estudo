@@ -8,5 +8,9 @@ class Game
 
   def initialize
     @board = Board.new
+    draw_board
+  def draw_board
+    @board.draw
+  end
   end
 end
