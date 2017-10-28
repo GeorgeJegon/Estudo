@@ -1,0 +1,38 @@
+#gameBoard {
+  background-color: #00F;
+  width: 800px;
+  height: 685px;
+  border-radius: 5%;
+  margin: 0 auto;
+}
+
+.row {
+}
+
+.row .cell {
+  background-color: #FFF;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 15px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.cell.dropping {
+  -webkit-animation: .5s linear slideDown;
+}
+
+.cell.filled.player-1 {
+  background-image: -webkit-radial-gradient(circle, #ff0000 72%, transparent 0%);
+}
+
+.cell.filled.player-2 {
+  background-image: -webkit-radial-gradient(circle, #ffff00 72%, transparent 0%);
+}
+
+@keyframes slideDown {
+  from { background-position-y: -80px; }
+  to { background-position-y: 0px; }
+}
