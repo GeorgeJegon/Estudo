@@ -6,7 +6,9 @@ class Game
 
   def_delegators :@board, :board_string
 
+  attr_reader :current_player
   def initialize
+    @current_player = 1
     @currentTurn = 0
     @board = Board.new
     draw_board
