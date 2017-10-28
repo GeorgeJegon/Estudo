@@ -12,6 +12,15 @@ class Game
     @currentTurn = 0
     @board = Board.new
     draw_board
+  end
+
+  def drop(column)
+    puts "---------- Turn #{@currentTurn + 1} ----------"
+    @board.drop(column - 1, @current_player)
+    @board.errors.empty? ? next_turn : display_game_errors
+    self
+  end
+
   def draw_board
     @board.draw
   end
