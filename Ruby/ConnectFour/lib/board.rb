@@ -1,8 +1,11 @@
 class Board
   COLUMNS = 7
   LINES = 6
+  attr_accessor :errors, :grid
+
   def initialize
     @grid   = Array.new(LINES){ Array.new(COLUMNS) { 0 } }
+    @errors = []
   def draw
     puts @grid.reverse.map(&method(:draw_line)).join("\n")
   end
