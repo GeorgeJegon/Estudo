@@ -10,6 +10,9 @@ class Board
   def board_string
     @grid.reverse.flatten.join
   end
+  def set_grid(grid)
+    @grid = grid.reverse
+  end
   def draw_column(column)
     column.zero? ? " " : column
   end
