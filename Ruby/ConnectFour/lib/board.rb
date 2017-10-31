@@ -9,8 +9,6 @@ class Board
   }.freeze
 
   WINNER_REGEXP = {
-    horizontal: "%{p}{4}",
-    vertical: "(?:%{p}\\d{6}){3}(?:%{p}\\d{6}?)+",
     diagonal_primary: ["(?:%{p}\\d{7}){3}(?:%{p}\\d{0,3})+", "(%{p})\\d{0,7}"],
     diagonal_seconday: ["(?:%{p}\\d{5}){3}(?:%{p}\\d{3,5})+", "(%{p})\\d{0,5}"]
   }.freeze
@@ -45,7 +43,10 @@ class Board
   end
 
   def win?(player_index)
-    win_horizontal?(player_index) || win_vertical?(player_index) || win_diagonal?(player_index)
+    @strategy.constants.reject(&method(:base_const?))
+                       .map(&method(:init_strategy_class))
+                       .each(&:execute)
+                       .map(&:has_winner?).any? ||  win_diagonal?(player_index)
   end
 
   def set_grid(grid)
@@ -54,18 +55,16 @@ class Board
 
   private
 
+  def base_const?(const)
+    const == :Base
+  end
+
+  def init_strategy_class(const)
+    @strategy.const_get(const).new(@grid)
+  end
+
   def valid_column?(column)
     column.between?(0, COLUMNS)
-  end
-
-  def win_horizontal?(player_index)
-    regex_str = WINNER_REGEXP[:horizontal] % { p: player_index }
-    !Regexp.new(regex_str).match(board_string).nil?
-  end
-
-  def win_vertical?(player_index)
-    regex_str = WINNER_REGEXP[:vertical] % { p: player_index }
-    !Regexp.new(regex_str).match(board_string).nil?
   end
 
   def win_diagonal?(player_index)
