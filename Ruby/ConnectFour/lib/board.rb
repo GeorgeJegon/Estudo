@@ -1,6 +1,12 @@
+require "board_checker"
+
 class Board
   COLUMNS = 7
   LINES = 6
+
+  STRATEGIES = {
+   by_regex: BoardChecker::ByRegex
+  }.freeze
 
   WINNER_REGEXP = {
     horizontal: "%{p}{4}",
@@ -13,6 +19,7 @@ class Board
 
   def initialize
     @grid   = Array.new(LINES){ Array.new(COLUMNS) { 0 } }
+    @strategy = STRATEGIES[:by_regex]
     @errors = []
   end
 
