@@ -46,6 +46,23 @@ describe Board do
       end
     end
 
+    context "when board's grid has four player symbol in sequence but not in a row" do
+      before do
+        subject.set_grid([
+          [0,0,0,0,0,1,1],
+          [1,1,0,0,0,0,0],
+          [0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0]
+        ])
+      end
+
+      it "returns false" do
+        expect(subject.win?(1)).to be false
+      end
+    end
+
     context "when board's grid has vertical winner" do
       before do
         subject.set_grid([
