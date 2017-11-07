@@ -15,14 +15,6 @@ module BoardChecker
       def execute
         @matches = grid_string.to_enum(:scan, REGEX_DEFINITION[:filter]).map { Regexp.last_match }.map { |match| match.to_s.scan(REGEX_DEFINITION[:group]).flatten.join("") }
       end
-
-      def longest_match
-        @longest_match ||= @matches.first
-      end
-
-      def winner_player
-        longest_match[1]
-      end
     end
   end
 end
