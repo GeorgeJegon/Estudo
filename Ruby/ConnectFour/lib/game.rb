@@ -1,4 +1,4 @@
-require "./lib/board.rb"
+require "board"
 require "forwardable"
 
 class Game

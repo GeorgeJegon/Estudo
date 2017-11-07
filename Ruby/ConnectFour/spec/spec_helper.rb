@@ -1,3 +1,1 @@
-Dir["./lib/*.rb"].each { |file| require file }
-
-require "byebug"
+Dir["./lib/*.rb"].sort.each { |file| require file }

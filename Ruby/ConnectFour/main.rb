@@ -1,4 +1,6 @@
-require "./lib/game.rb"
+$LOAD_PATH.unshift "./lib"
+
+require "game"
 
 game = Game.new
 
