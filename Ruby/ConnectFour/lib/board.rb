@@ -60,7 +60,7 @@ class Board
   end
 
   def init_strategy_class(const)
-    @strategy.const_get(const).new(@grid)
+    @strategy.const_get(const).new(@grid.reverse)
   end
 
   def valid_column?(column)
