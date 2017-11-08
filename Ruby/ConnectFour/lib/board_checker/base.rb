@@ -4,8 +4,12 @@ module BoardChecker
       @grid = grid
     end
 
-    def has_winner?; end
+    def has_winner?
+      raise NotImplementedError, "Method #{__method__} need to be implemented"
+    end
 
-    def execute; end
+    def execute
+      raise NotImplementedError, "Method #{__method__} need to be implemented"
+    end
   end
 end
