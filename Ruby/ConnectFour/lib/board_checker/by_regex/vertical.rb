@@ -2,8 +2,8 @@ module BoardChecker
   module ByRegex
     class Vertical < Base
       REGEX_DEFINITION = {
-        filter: /((?:1\d{6}){3}(?:1\d{0,6})+)/,
-        group: /(1)\d{0,6}/
+        filter: /(?:([12])\d{6}){3}(?:\1\d{0,6})+/,
+        group: /([12])\d{0,6}/
       }.freeze
 
       @matches = []
