@@ -8,7 +8,7 @@ class Board
    by_regex: BoardChecker::ByRegex
   }.freeze
 
-  attr_accessor :errors, :grid
+  attr_reader :errors, :grid
 
   def initialize
     @grid   = Array.new(LINES){ Array.new(COLUMNS) { 0 } }
