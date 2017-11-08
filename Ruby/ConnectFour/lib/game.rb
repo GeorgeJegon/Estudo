@@ -39,7 +39,7 @@ class Game
 
   def display_game_errors
     puts @board.errors.join("\n")
-    @board.errors = []
+    @board.clear_errors
   end
 
   private

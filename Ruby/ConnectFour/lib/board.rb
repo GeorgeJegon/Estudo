@@ -52,6 +52,10 @@ class Board
     (0...COLUMNS).to_a.keep_if(&method(:line_playable_column))
   end
 
+  def clear_errors
+    @errors = []
+  end
+
   private
 
   def base_const?(const)
