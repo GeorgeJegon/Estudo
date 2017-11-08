@@ -11,7 +11,7 @@ class Board
   attr_reader :errors, :grid
 
   def initialize
-    @grid   = Array.new(LINES){ Array.new(COLUMNS) { 0 } }
+    @grid   = Array.new(LINES) { Array.new(COLUMNS) { 0 } }
     @strategy = STRATEGIES[:by_regex]
     @errors = []
   end
