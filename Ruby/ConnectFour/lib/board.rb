@@ -48,6 +48,10 @@ class Board
     @grid = grid.reverse
   end
 
+  def playable_columns
+    (0...COLUMNS).to_a.keep_if(&method(:line_playable_column))
+  end
+
   private
 
   def base_const?(const)
