@@ -7,15 +7,16 @@ class Game
   def_delegators :@board, :board_string
 
   attr_reader :current_player
+
   def initialize
     @current_player = 1
-    @currentTurn = 0
+    @current_turn = 0
     @board = Board.new
     draw_board
   end
 
   def drop(column)
-    puts "---------- Turn #{@currentTurn + 1} ----------"
+    puts "---------- Turn #{@current_turn + 1} ----------"
     @board.drop(column - 1, @current_player)
     @board.errors.empty? ? next_turn : display_game_errors
     self
@@ -33,8 +34,8 @@ class Game
 
   def next_turn
     draw_board
-    @currentTurn += 1
-    @current_player = (@currentTurn % 2) + 1
+    @current_turn += 1
+    @current_player = (@current_turn % 2) + 1
   end
 
   def display_game_errors
