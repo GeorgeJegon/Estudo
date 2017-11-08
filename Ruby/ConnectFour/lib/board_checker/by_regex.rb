@@ -7,5 +7,3 @@ module BoardChecker
   require "board_checker/by_regex/diagonal_primary"
   require "board_checker/by_regex/diagonal_secondary"
 end
-
-
