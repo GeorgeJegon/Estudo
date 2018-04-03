@@ -216,7 +216,7 @@ x   | n   | Resutado
 100 | 150 | `2.68811207683768490e+043`
 100 | 155 | `2.68811657088610140e+043`
 
-##Tabela comparação entre e^-x e 1/e^x
+## Tabela comparação entre e^-x e 1/e^x
 x    | n   | Resultado de e^-x           | Resultado de 1/e^x         | Diferença entre os dois valores
 ---  | --- | ---                         | ---                        | ---    
 -1   | 1   | `1.00000000000000000e+000`  | `1.00000000000000000e+000` | `0.00000000000000000e+000` 
