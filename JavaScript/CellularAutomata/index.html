@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <script src="app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .automata-grid {
+
+    }
+
+    .automata-row {
+      line-height: 0;
+    }
+
+    .automata-cell {
+      display: inline-block;
+      width: 5px;
+      /*margin: 2px;*/
+      height: 5px;
+    }
+
+    .automata-cell.active {
+      background-color: #000;
+    }
+
+    .automata-cell.inactive {
+      /*background-color: #F00;*/
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <script>
+    let automata = new CellularAutomata({
+      generations: 100,
+      populations: 100
+    });
+
+    automata.run(document.querySelector("body"));
+  </script>
+</body>
+</html>
