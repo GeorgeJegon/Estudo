@@ -13,7 +13,6 @@
     }
 
     .automata-grid {
-
     }
 
     .automata-row {
@@ -23,7 +22,6 @@
     .automata-cell {
       display: inline-block;
       width: 5px;
-      /*margin: 2px;*/
       height: 5px;
     }
 
@@ -32,21 +30,45 @@
     }
 
     .automata-cell.inactive {
-      /*background-color: #F00;*/
     }
-
   </style>
+  <script type="text/javascript">
+    const automata = new CellularAutomata()
 
+    function test(form) {
+      let ruleElement = form.rule,
+          ruleValue = ruleElement.value,
+          automataGenerations = form.generations.value,
+          automataRandomPosition = form.randomPosition.checked,
+          canvasElement = document.getElementById("canvas"),
+          population = canvasElement.offsetWidth;
+
+      automata.populations = Math.floor(population/5)
+      automata.generations = automataGenerations
+      automata.gridStates = [];
+      automata.randomInitialPosition = automataRandomPosition
+
+      if (!ruleValue) {
+        alert("Empty rule!");
+      } else {
+        canvasElement.innerHTML = ""
+        automata.rule = ruleValue
+        automata.run(canvasElement)
+      }
+      return false;
+    }
+  </script>
 </head>
 <body>
+  <form onsubmit="return test(this);">
+    <p>
+      <label>Rule:</label> <input type="number" min="0" max="255" value="101" name="rule">
+    </p>
+    <p><label>Generations:</label> <input type="number" min="1" name="generations" value="100"></p>
+    <p><label>Random Initial Position:</label> <input type="checkbox" value="true" name="randomPosition"></p>
+    <input type="submit" value="Run">
+  </form>
 
-  <script>
-    let automata = new CellularAutomata({
-      generations: 100,
-      populations: 100
-    });
-
-    automata.run(document.querySelector("body"));
-  </script>
+  <div id="canvas"></div>
 </body>
 </html>
